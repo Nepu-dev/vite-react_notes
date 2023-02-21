@@ -4,6 +4,17 @@ const Formulario = () => {
   const [nombreNota, setnombreNota] = useState("");
   const [fecha, setFecha] = useState("");
   const [nota, setNota] = useState("");
+
+  const [error, setError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if ([nombreNota, fecha, nota].includes('')) {
+      setError(true);
+    }else{
+      setError(false);
+    }
+  }
   return (
     <div className="w-1/2 lg:w-2/5 mx-5">
       <h2 className=" font-black text-3xl mb-5">Notas</h2>
@@ -11,7 +22,14 @@ const Formulario = () => {
         Añade notas y{" "}
         <span className="text-indigo-600 font-bold">Administralas</span>
       </p>
-      <form className="bg-white shadow-lg rounded-md px-10 py-10">
+      <form 
+      onSubmit={handleSubmit}
+      className="bg-white shadow-lg rounded-md px-10 py-10">
+        {error && <div className="bg-red-700 font-bold p-2 mb-5 text-white rounded-md text-center">
+          <p>
+            Todos los campos son obligatorios
+          </p>
+          </div>}
         <div className="mb-5">
           <label
             htmlFor="nombreNota"
