@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Formulario = () => {
+const Formulario = ( {notas, setNotas} ) => {
   const [nombreNota, setnombreNota] = useState("");
   const [fecha, setFecha] = useState("");
   const [nota, setNota] = useState("");
@@ -14,6 +14,14 @@ const Formulario = () => {
     }else{
       setError(false);
     }
+    const objetoNota = {
+      nombreNota,
+      fecha,
+      nota
+    }
+
+    setNotas([...notas, objetoNota])
+
   }
   return (
     <div className="w-1/2 lg:w-2/5 mx-5">
