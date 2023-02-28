@@ -13,7 +13,7 @@ function App() {
           notas = {notas}
           setNotas = {setNotas}
         />
-        <Listado/>
+        <Listado notas = {notas}/>
       </div>
 
     </div>

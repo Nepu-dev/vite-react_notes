@@ -14,6 +14,7 @@ const Formulario = ( {notas, setNotas} ) => {
     }else{
       setError(false);
     }
+    
     const objetoNota = {
       nombreNota,
       fecha,
