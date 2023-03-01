@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Formulario = ( {notas, setNotas} ) => {
+const Formulario = ( {notas, setNotas, nota, setNota} ) => {
   const [nombreNota, setnombreNota] = useState("");
   const [fecha, setFecha] = useState("");
-  const [nota, setNota] = useState("");
+  const [contenido, setContenido] = useState("");
 
   const [error, setError] = useState(false);
+
+  useEffect(
+    () => {
+      if (Object.keys(nota).length > 0) {
+        setnombreNota(nota.nombreNota)
+        setFecha(nota.fecha)
+        setContenido(nota.contenido)
+      }
+    },[nota]
+  )
 
   const generarId = () => {
     const random = Math.random().toString(36).substring(2);
@@ -16,7 +26,7 @@ const Formulario = ( {notas, setNotas} ) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if ([nombreNota, fecha, nota].includes('')) {
+    if ([nombreNota, fecha, contenido].includes('')) {
       setError(true);
     }else{
       setError(false);
@@ -25,11 +35,25 @@ const Formulario = ( {notas, setNotas} ) => {
     const objetoNota = {
       nombreNota,
       fecha,
-      nota,
-      id: generarId()
+      contenido
     }
 
-    setNotas([...notas, objetoNota])
+    if (nota.id) {
+      objetoNota.id = nota.id
+      const notasActualizadas = notas.map( notaState => notaState.id === nota.id ? objetoNota : notaState)
+
+      setNotas(notasActualizadas)
+      setNota({})
+    }else{
+      objetoNota.id = generarId()
+      setNotas([...notas, objetoNota])
+
+    }
+
+    //reiniciar formulario
+    setnombreNota('')
+    setFecha('')
+    setContenido('')
 
   }
   return (
@@ -92,14 +116,14 @@ const Formulario = ( {notas, setNotas} ) => {
             rows="10"
             className="border-2 w-full p-2 rounded-md mt-2"
             placeholder="Escriba aqui su nota"
-            value={nota}
-            onChange={(e) => setNota(e.target.value)}
+            value={contenido}
+            onChange={(e) => setContenido(e.target.value)}
           ></textarea>
         </div>
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold rounded-md hover:bg-indigo-700 cursor-pointer transition-colors"
-          value="Agregar nota"
+          value={ nota.id ? "Editar nota" : "Agregar nota"}
         />
       </form>
     </div>

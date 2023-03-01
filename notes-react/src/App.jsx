@@ -10,7 +10,7 @@ function App() {
     <div className="container mx-auto mt-20">
       <Header />
       <div className="mt-12 md:flex mb-12">
-        <Formulario notas={notas} setNotas={setNotas} />
+        <Formulario notas={notas} setNotas={setNotas} nota={nota} setNota={setNota}/>
         <Listado notas={notas} setNota={setNota} />
       </div>
     </div>

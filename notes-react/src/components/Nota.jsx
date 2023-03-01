@@ -11,7 +11,7 @@ const Nota = ({nota, setNota}) => {
         </h4>
         <p className=" font-bold mb-3 text-gray-700 uppercase">
           Contenido: {""}{" "}
-          <span className="font-normal normal-case">{nota.nota}</span>
+          <span className="font-normal normal-case">{nota.contenido}</span>
         </p>
         <div className="flex justify-between mt-10">
           <button 
