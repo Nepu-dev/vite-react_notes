@@ -1,5 +1,5 @@
 import Nota from "./Nota";
-const Listado = ({ notas, setNota }) => {
+const Listado = ({ notas, setNota, eliminarNota }) => {
   return (
     <div className="w-1/2 lg:w-3/5">
       {notas && notas.length ? (
@@ -14,6 +14,7 @@ const Listado = ({ notas, setNota }) => {
             key={nota.id} 
             nota={nota} 
             setNota={setNota}
+            eliminarNota={eliminarNota}
             />
           ))}
         </>

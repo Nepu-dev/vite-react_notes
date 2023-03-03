@@ -1,4 +1,10 @@
-const Nota = ({nota, setNota}) => {
+const Nota = ({nota, setNota, eliminarNota}) => {
+  const handleEliminar = () => {
+    const respuesta = confirm('Deseas eliminar esta nota?')
+    if (respuesta) {
+      eliminarNota(nota.id)
+    }
+  }
   return (
     <div>
       <div className="m-3 bg-white shadow-md px-5 py-10 rounded-xl">
@@ -22,6 +28,7 @@ const Nota = ({nota, setNota}) => {
           <button 
           type="button"
           className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg"
+          onClick={handleEliminar}
           >Eliminar</button>
         </div>
       </div>
