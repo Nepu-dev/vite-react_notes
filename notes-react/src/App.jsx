@@ -12,9 +12,20 @@ function App() {
     setNotas(notasActualizadas)
   }
 
+  useEffect(
+    () => {
+      const obtenerLS = () => {
+        const notasLS = JSON.parse(localStorage.getItem('notas')) ?? [];
+        setNotas(notasLS)
+      }
+      obtenerLS();
+    }, []
+  );
+
   useEffect(() => {
     localStorage.setItem('notas', JSON.stringify( notas ));
   }, [notas])
+
   return (
     <div className="container mx-auto mt-20">
       <Header />
